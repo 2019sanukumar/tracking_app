@@ -1,0 +1,17 @@
+{
+  "name": "trakcing-app",
+  "version": "1.0.0",
+  "description": "tracking app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "sanu",
+  "license": "ISC",
+  "dependencies": {
+    "@easypost/api": "^3.11.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12"
+  }
+}

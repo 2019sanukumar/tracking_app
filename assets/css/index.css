@@ -1,0 +1,30 @@
+body{
+  /* background-color: red; */
+  text-align: center;
+}
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    max-width: 50%;
+    /* margin-left:20%; */
+    
+      /* background-color: #3CBC8D; */
+      /* color: white; */
+    
+  }
+
+  input[type=submit] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    max-width: 50%;
+    /* margin-left:20%; */
+/*     
+      background-color: #3CBC8D;
+      color: white; */
+    
+  }
+
