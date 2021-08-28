@@ -3,6 +3,7 @@ const app =express();
 const port=8080;
 
 const db=require('./db');
+const axios = require('axios').default;
 
 app.use(express.static(__dirname + '/assets'));
 app.set('view engine', 'ejs');
@@ -14,31 +15,38 @@ const Shipment=require('./models');
 app.get('/track',function(req,res){
     res.render('ship');
 })
-app.post('/track-input',function(req,res)
+app.post('/track-input', function(req,res)//added async await functon in api
 {
     //take input from user about code  and trace Number
     console.log(req.body);
     let code=req.body.Company_code;
     let trace_no=req.body.Tracking_num;
-    var courier = tracker.courier(tracker.COURIER.KOREAPOST.code)
+    console.log(code);
+    var courier = tracker.courier(tracker.COURIER.KOREAPOST.CODE)
     var data;
     courier.trace({trace_no}, function (err, result) {
         if(err)
         {
-            console.log('enter valid trace number and courier comany');
+            console.log('enter valid trace number and courier comany',err);
             data='enter valid trace number and courier comany';
-            return res.end(val);
+            return res.end(data);
 
 
         }
-
+        data=result;
         console.log(result)
     });
+    //data will contain variour tracking detail about shipemt
     res.render('ship',{
-        track_val:req.body
+        track_val:data,
+
     });
 
 })
+
+
+
+
 
 
 app.get('/home', function(req, res) {
