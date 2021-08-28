@@ -14,6 +14,16 @@ install google translate api
 npm install delivery-tracker
 ```
 
+install ejs view engine 
+```
+npm install ejs
+```
+
+install nodemon
+```
+npm install nodemon
+```
+
 make sure your system have mongodb installed.
 
 
@@ -24,7 +34,29 @@ install monogoose dependecies using
 npm install mongoose
 ```
 
+##various router are as follows:
 
+1.For showin detail about product:
+```
+https://localhost:8080/
+```
+2.adding detail about product:
+
+```
+https://localhost:8080/take-input
+```
+
+3.Taking detail for tracking shipment:
+
+```
+https://localhost:8080/track
+```
+
+4.Showing detaila after fetching detail from api :
+
+```
+https://localhost:8080/track-input
+```
 
 ## Usage
 this is the api which will return the value by taking valid trakcing number and courier company name
