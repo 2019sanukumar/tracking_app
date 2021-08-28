@@ -10,28 +10,33 @@ app.set('views','./views');
 app.use(express.urlencoded({extended: true}));//for encoding req 
 var tracker = require('delivery-tracker')
 const Shipment=require('./models');
-// use res.render to load up an ejs view file
 
-// index page
-app.get('/track',function(req,res)
+app.get('/track',function(req,res){
+    res.render('ship');
+})
+app.post('/track-input',function(req,res)
 {
     //take input from user about code  and trace Number
-
-    var courier = tracker.courier(tracker.COURIER.KOREAPOST.CODE)
+    console.log(req.body);
+    let code=req.body.Company_code;
+    let trace_no=req.body.Tracking_num;
+    var courier = tracker.courier(tracker.COURIER.KOREAPOST.code)
     var data;
-    courier.trace({trace_number}, function (err, result) {
+    courier.trace({trace_no}, function (err, result) {
         if(err)
         {
             console.log('enter valid trace number and courier comany');
             data='enter valid trace number and courier comany';
+            return res.end(val);
 
-courier.trace({trace_number}, function (err, result) {
-  console.log(result)
-})
+
         }
+
         console.log(result)
     });
-    res.end(data);
+    res.render('ship',{
+        track_val:req.body
+    });
 
 })
 
