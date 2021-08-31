@@ -85,7 +85,35 @@ app.get('/track',function(req,res){
 // })
 
 
+app.get('/delete/:id',function(req,res)
+{
+    let id=req.params.id;
+    // Shipment.find({},function(err,val)
+    // {
+    //     if(err){
+    //         console.log('error in fetching data from database',err);
+    //     }
+    //     else{
+    //         return res.render('index',{
+    //             val:val,
 
+    //         })
+
+    //     }
+    // })
+    
+    Shipment.findByIdAndDelete(id,function(err)
+    {
+        if(err)
+        {
+            console.log('error in deleteing shipement from database',err);
+        }
+        console.log('succesfullt deleted from database');
+        return res.redirect('back');
+    })
+    // console.log(req.body);
+
+})
 
 
 
@@ -93,26 +121,10 @@ app.get('/track',function(req,res){
 app.post('/track-input', async function(req,res)
 {
     let result;
-    // var options = {
-    //     method: 'POST',
-    //     url: 'https://order-tracking.p.rapidapi.com/trackings/realtime',
-    //     headers: {
-    //       'content-type': 'application/json',
-    //       'x-rapidapi-host': 'order-tracking.p.rapidapi.com',
-    //       'x-rapidapi-key': 'fc36adc14fmsh32cfa3c05903307p137af2jsn19a6de77d96e'
-    //     },
-    //     data: {tracking_number: '1Z74A08E0317341984', carrier_code: 'ups'}
-    //   };
-      
-    //   axios.request(options).then(function (response) {
-    //       console.log(response.data.data);
-    //       result=response.data.data;
-    //   }).catch(function (error) {
-    //       console.error(error);
-    //   });
-    //   console.log(result);
-    //   res.end(JSON.stringify(result));
-
+    
+    let carrier=req.body.Company_code;
+    let trace_no=req.body.Tracking_num;
+    console.log(carrier,trace_no);
     
         try{
 
@@ -124,12 +136,12 @@ app.post('/track-input', async function(req,res)
                   'x-rapidapi-host': 'order-tracking.p.rapidapi.com',
                   'x-rapidapi-key': 'fc36adc14fmsh32cfa3c05903307p137af2jsn19a6de77d96e'
                 },
-                data: {tracking_number: '1Z74A08E0317341984', carrier_code: 'ups'}
+                data: {tracking_number: trace_no, carrier_code: carrier}
             };
 
             const resp= await axios.request(options);
             console.log(resp.data.data);
-            result=resp.data.data;
+            result=resp.data.data.items[0];
 
 
 
@@ -140,9 +152,14 @@ app.post('/track-input', async function(req,res)
             console.log(err);
         }
     
-    // sendreq();
+    
     console.log(result);
-    res.end(JSON.stringify(result));
+    // JSON.stringify(result);
+    console.log(result);
+    // res.render('ship',{
+    //     track:JSON.parse(result)
+    // });
+    res.send(result);
 
 });
 

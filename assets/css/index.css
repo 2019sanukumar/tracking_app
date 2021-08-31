@@ -118,3 +118,15 @@ input[type=text] {
     }
   
   }
+
+  #delete-buttom
+  {
+
+  }
+  #head
+  {
+    
+    max-height: fit-content;
+    background-color:orange
+    /* margin-top:-10px; */
+  }
