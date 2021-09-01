@@ -1,0 +1,49 @@
+<html>
+<head>
+  <title>Track</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <link href="/css/index.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div> 
+    <br>
+    <h3 style="text-align: center; font-family: 'Courier New', Courier, monospace;">
+    Tracking Page
+    </h3>
+    <br><br>
+    
+
+      <table>
+        <thead>
+          <tr>
+            <th>Tracking Number</th>
+            <th>Courier Company</th>
+            <th>Expected Date Of Arrival</th>
+            <th>Present location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-column="Order_ID" ><%=track['id']%></td>
+            <td data-column="Courier Company" ><%=track['carrier_code']%></td>
+            <td data-column="Expected Date Of Arrival" ><%=track['status']%></td>
+            <td data-column="Present location" ><%=track['original_country']%></td>
+            
+           
+            
+          </tr>
+          
+          
+          
+        </tbody>
+       
+      </table>
+
+
+  
+  </div>
+</body>
+</html>

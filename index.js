@@ -1,6 +1,6 @@
 const express=require('express');
 const app =express();
-// const port=8080;
+
 const port=process.env.port || 8080;// port number on which server will run
 app.use(express.json());
 const shippo=require('shippo')('shippo_test_71d2f253abcadbcfa608c9a78a782c525a50f1a9');
@@ -15,93 +15,15 @@ app.use(express.urlencoded({extended: true}));//for encoding req
 var tracker = require('delivery-tracker')
 const Shipment=require('./models');
 
-app.get('/track',function(req,res){
+app.get('/track-shipment',function(req,res){
     res.render('ship');
 })
-// app.post('/track-input', function(req,res)//added async await functon in api
-// {
-//     //take input from user about code  and trace Number
-//     console.log(req.body);
-//     let code=req.body.Company_code;
-//     let trace_no=req.body.Tracking_num;
-//     console.log(code);
-//     var courier = tracker.courier(tracker.COURIER.KOREAPOST.CODE)
-//     var data;
-//     courier.trace({trace_no}, function (err, result) {
-//         if(err)
-//         {
-//             console.log('enter valid trace number and courier comany',err);
-//             data='enter valid trace number and courier comany';
-//             return res.end(data);
 
-
-//         }
-//         data=result;
-//         console.log(result)
-//     });
-//     //data will contain variour tracking detail about shipemt
-//     res.render('ship',{
-//         track_val:data,
-
-//     });
-
-// });
-
-// app.post('/track-input',async function(req,res)
-// {
-//     console.log(req.body);
-//     let carrier_code=req.body.Company_code;
-//     let trace_no=req.body.Tracking_num;
-//     let rt;
-//     // console.log(code);
-//     var options = {
-//         method: 'POST',
-//         uri: 'https://api.shipengine.com/v1/tracking?carrier_code='+carrier_code+'&tracking_number='+trace_no,
-//         headers: {
-//           Host: 'api.shipengine.com',
-//           'API-Key': 'TEST_3kzY06cAllPz1pnenHO3zsU82hXiCR2Xm/K84e0A7oE'
-//         }
-//         // json:true
-//       };
-//       try{
-//           let res1=await request(options);
-//           if(err)
-//           {
-//               console.log(err,"error in api");
-//           }
-//           console.log(res1.body);
-//           rt=res1.body
-//       }
-//       catch(err)
-//       {
-//           console.log(err);
-//       }
-      
-
-    
-//       console.log(rt,'rt');
-//       res.send('sanu');
-
-// })
 
 
 app.get('/delete/:id',function(req,res)
 {
     let id=req.params.id;
-    // Shipment.find({},function(err,val)
-    // {
-    //     if(err){
-    //         console.log('error in fetching data from database',err);
-    //     }
-    //     else{
-    //         return res.render('index',{
-    //             val:val,
-
-    //         })
-
-    //     }
-    // })
-    
     Shipment.findByIdAndDelete(id,function(err)
     {
         if(err)
@@ -153,13 +75,14 @@ app.post('/track-input', async function(req,res)
         }
     
     
-    console.log(result);
+    console.log(result.id);
     // JSON.stringify(result);
+    
     console.log(result);
-    // res.render('ship',{
-    //     track:JSON.parse(result)
-    // });
-    res.send(result);
+    res.render('view_ship',{
+        track:result
+    });
+    // res.send(result);
 
 });
 
