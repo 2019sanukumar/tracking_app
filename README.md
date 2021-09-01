@@ -9,9 +9,9 @@ Use the express library
 npm install express
 ```
 
-install google translate api
+used below api
 ```bash
-npm install delivery-tracker
+https://rapidapi.com/colinnn/api/order-tracking/
 ```
 
 install ejs view engine 
